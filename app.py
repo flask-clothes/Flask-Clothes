@@ -6,6 +6,7 @@ app = Flask(__name__)
 class Clothe:
 
     def __init__(self,id,name,price,ctg):
+        self.id = id
         self.name = name
         self.price = price
         self.ctg = ctg
@@ -24,14 +25,19 @@ def home():
     return render_template('index.html',clothes=clothes)
 
 @app.route("/ssr/clothe/<id>")
-def home(id):
+def info(id):
+    print(id)
     selected_clothe = clothes[0]
     for clothe in clothes:
-        if clothe.id == id:
+        print("Clothe id:" ,clothe.id)
+        print("Clothe id:" ,clothe.id, id)
+        print(clothe.id == id)
+        if int(clothe.id) == int(id):
+            print("hi")
             selected_clothe = clothe
             return render_template('clothe.html',clothe=selected_clothe)
 
-    return render_template("index.html",clothes=clothes)
+    return redirect(url_for('home'))
     
     
 
