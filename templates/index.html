@@ -10,17 +10,22 @@
         <h1 style="color: antiquewhite;padding-top: 30px;">Roupas</h1>
         <div class="clothes__content" style="display: flex;justify-content: center; gap: 45px;padding-top: 50px;">
         {% for clothe in clothes %}
-            <div class="clothe__card" style="width: 150px;padding: 10px; height: 200px;background-color: aliceblue; color: antiquewhite;border-radius: 8px; display: flex;flex-direction: column; gap: 10px;justify-content: space-between;">
-                <div class="title" style="font-size: 12px; height: 50px;">
+            <div class="clothe__card" >
+                <div class="card--img--space">
+                    <img src="{{ clothe.imgurl }}" alt="">
+                </div>
+                <div class="card--content">
+                <div class="title" style="">
                     <h1>{{ clothe.name }}</h1>
                 </div>
                 <div class="price" style="color: green;">
-                <p>{{ clothe.price }}</p>
+                <p> R$ {{ clothe.price }}</p>
                 </div>
                 <div style="display: flex;justify-content: center;">
                     <a href="ssr/clothe/{{clothe.id}}">
                     <button class="card__button" >Comprar</button>
                     </a>
+                </div>
                 </div>    
             </div>
         {% endfor %}

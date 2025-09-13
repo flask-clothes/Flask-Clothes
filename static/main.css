@@ -1,0 +1,103 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.home{
+    width: 100%;
+    padding-block: 200px;
+}
+.wrapper{
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+h1,p{
+    margin: 0;
+}
+.card--content .title{
+   font-size: 12px;
+   color: antiquewhite;
+}
+
+.card__button{
+    padding: 5px;
+    background-color: antiquewhite;
+    border-radius: 7px;
+    outline: none;
+    border: 2px solid antiquewhite;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 200ms linear;
+}
+.card__button:hover{
+    background-color: aliceblue;
+    border-color: antiquewhite;
+    color: antiquewhite;
+}
+.clothe__card{
+     transition: all 100ms ease;
+    width: 350px;
+   
+    
+    background-color: #272727;
+    border-radius: 10px;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.card--img--space{
+    width: 100%;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    overflow: hidden;
+}
+.card--img--space img{
+    width: 100%;
+}
+.card--content{
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 0px 15px 0px;
+}
+
+.clothe__card__big h1{
+    color: antiquewhite;
+}
+
+.spaceFromNav{
+    padding-top: 20px;
+}
+
+.clothe__card__big{
+    display: flex;
+    padding: 15px;
+    background-color: #272727;
+    border-radius: 20px;
+}
+.big__card__img--space{
+    width: 50%;
+    border-radius: 20px;
+    overflow: hidden;
+}
+.big__card__img--space img{
+    width: 100%;
+}
+.big__card__right{
+    width: 50%;
+    display: flex;
+    gap: 40px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.info{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

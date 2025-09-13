@@ -2,22 +2,29 @@
 
 {% block content %}
 
+<div class="spaceFromNav">
 <div class="wrapper">
-    <div class="clothe__card__big" style="width: 1000px;padding: 10px; height: 600px;background-color: aliceblue; color: antiquewhite;border-radius: 8px; display: flex; gap: 5px;justify-content: space-between;">
-        <div class="title" style="font-size: 12px; height: 50px;width: 80%;">
-            <h1>{{ clothe.name }}</h1>
+    <div class="clothe__card__big" >
+        <div class="big__card__img--space">
+            <img src="{{ clothe.imgurl }}" alt="">
         </div>
-        <div class="info" style="width: 20%;justify-content: center;display: flex;flex-direction: column;gap: 10px;">
-            <div class="price" style="color: green;text-align: center;">
-                <p>{{ clothe.price }}</p>
+        <div class="big__card__right">
+            <div class="title" style="">
+                <h1>{{ clothe.name }}</h1>
             </div>
-            <div style="display: flex;justify-content: center;">
-                <a href="/clothe/{{clothe.name}}">
-                <button class="card__button" >Comprar</button>
-                </a>
+            <div class="info" style="">
+                <div class="price" style="color: green;text-align: center;">
+                    <p> R$ {{ clothe.price }}</p>
+                </div>
+                <div style="">
+                    <a href="/clothe/{{clothe.name}}">
+                    <button class="card__button defaultBtn" >Comprar</button>
+                    </a>
+                </div>
             </div>
         </div>    
     </div>
+</div>
 </div>
 
 {% endblock %}
