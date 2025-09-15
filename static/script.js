@@ -1,55 +1,26 @@
-const allDefaultBtn = document.querySelectorAll(".defaultBtn")
-console.log(allDefaultBtn)
-let onanimate = false
-allDefaultBtn.forEach((e)=>{
+const bannerInner = document.getElementById("banner-inner");
 
-    e.addEventListener('click',(event)=>{event.preventDefault()})
+if (bannerInner) {
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+    const bannerItems = document.querySelectorAll(".banner--item");
+    let currentIndex = 0;
 
-
-})
-const banner = document.getElementById("banner")
-const nextItemBtn = document.getElementById("next--item")
-const prevItemBtn = document.getElementById("prev--item")
-
-nextItemBtn.addEventListener("click",(e)=>{
-    if (!onanimate){
-        onanimate=true
-        let width = window.innerWidth
-        let index = (banner.scrollLeft/width + 1)
-        let target = (index * width)-1
-        
-        if(target > index && ( index<5)){
-        console.log(index)
-        e.preventDefault()
-        console.log("next")
-        const animate = setInterval(()=>{
-            console.log("Animate ,", target," > ", banner.scrollLeft)
-            console.log(banner.scrollLeft <= target)
-            banner.scrollLeft <= target? banner.scrollLeft +=10 : (onanimate=false,banner.scrollLeft = target,clearInterval(animate))
-        },0.5)
-        }
-    
-    }
-})
-prevItemBtn.addEventListener("click",(e)=>{
-    if(!onanimate){
-        onanimate = true
-        let width = window.innerWidth
-        let index = (banner.scrollLeft/width - 1)
-        
-        let target = (index * width)+1
-        if (target > index){
-        console.log(index)
-        e.preventDefault()
-        console.log("next")
-        const animate = setInterval(()=>{
-            console.log("Animate ,", target," > ", banner.scrollLeft)
-            console.log(banner.scrollLeft <= target)
-            banner.scrollLeft >= target? banner.scrollLeft -=10 : (onanimate=false,banner.scrollLeft = target,clearInterval(animate))
-        },0.5)
-        }else{
-            onanimate = false
-        }
+    function updateBanner() {
+        const itemWidth = bannerItems[0].clientWidth;
+        bannerInner.style.transform = `translateX(${-currentIndex * itemWidth}px)`;
     }
 
-})
+    nextBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % bannerItems.length;
+        updateBanner();
+    });
+
+    prevBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + bannerItems.length) % bannerItems.length;
+        updateBanner();
+    });
+
+    window.addEventListener('load', updateBanner);
+    window.addEventListener('resize', updateBanner);
+}
