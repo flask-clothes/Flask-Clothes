@@ -25,7 +25,13 @@ h1,p{
    font-size: 12px;
    color: antiquewhite;
 }
-
+.clothes__content{
+    padding-top: 50px;
+    flex-wrap: wrap;
+}
+.clothes--title{
+    padding-top: 50px;
+}
 .card__button{
     padding: 5px;
     background-color: antiquewhite;
@@ -209,4 +215,21 @@ h1,p{
     
     height: 300px;
 
+}
+
+.ctg_btns{
+    display: flex;
+    gap: 10px;
+    padding-top: 35px;
+}
+
+.ctgBtn{
+    padding: 3px 10px;
+    color: #e4e4e4;
+    outline: none;
+    background-color: #272727;
+    border-radius: 10px;
+    width: 100px;
+    box-sizing: border-box;
+    height: 30px;
 }

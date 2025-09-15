@@ -2,6 +2,7 @@
 
 {% block content %}
 <div class="home" style="height: 900px;justify-self: center; justify-content: center; padding-top: 40px;">
+    
     <div class="banner relative" style="" >
             <div class="prev bannerbtn bannerbtn--left" id="prev--item">
                 <p> < </p>
@@ -10,7 +11,7 @@
                 <p> > </p>
             </div>
             <div class="banner-bg relative" id="banner">
-            {% for clothe in clothes %}
+            {% for clothe in bannerClothes %}
             <div class="banner--item">
                 <img src="{{ clothe.imgurl }}" alt="">
             </div>
@@ -20,7 +21,13 @@
     </div>
     <div class="wrapper">
         
-        <h1 style="color: antiquewhite;padding-top: 30px;">Roupas</h1>
+        <h1 class="clothes--title" style="color: antiquewhite;">Roupas</h1>
+        <form class="ctg_btns" method="post">
+
+            {% for ctg in ctgs %}
+            <button class="ctgBtn" name="ctg" value="{{ ctg }}">{{ ctg }}</button>
+            {% endfor %}
+        </form>
         <div class="clothes__content" style="display: flex;justify-content: center; gap: 45px;padding-top: 50px;">
         {% for clothe in clothes %}
             <div class="clothe__card" >

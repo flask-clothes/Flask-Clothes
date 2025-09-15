@@ -27,13 +27,41 @@ class Clothe:
         return self.name
 
 
-clothes = [Clothe(1, "Nike Shoes", 50, "sport", "/static/assets/products/green_nike_shoes.jpeg"), Clothe(
-    2, "Moletom Cinza", 200, "expensive", "/static/assets/products/grey.jpeg"), Clothe(3, "Camisa de compressão Nike", 150, "cold", "/static/assets/products/nike_compression_tshirt.jpeg")]
+ctgs = [
+    'sport',
+    "expensive",
+    "cold",
+    "all",
+
+]
+
+clothes = [
+    Clothe(2, "Moletom Cinza", 200, "expensive",
+           "/static/assets/products/grey.jpeg"),
+    Clothe(1, "Nike Shoes", 50, "sport",
+           "/static/assets/products/green_nike_shoes.jpeg"),
+    Clothe(3, "Camisa de compressão Nike", 150, "cold",
+           "/static/assets/products/nike_compression_tshirt.jpeg"),
+    Clothe(4, "Calça Jogger da Puma", 100, "cold",
+           "/static/assets/products/puma_jogger.jpeg"),
+    Clothe(5, "Camisa do Corinthians", 100, "sport",
+           "/static/assets/products/corinthians_tshirt.png"),
+    Clothe(6, "Strap", 100, "sport", "/static/assets/products/strap.jpeg")
+]
 
 
-@app.route("/ssr")
+@app.route("/ssr", methods=["POST", "GET"])
 def home():
-    return render_template('index.html', clothes=clothes)
+    if request.method == "POST":
+        ctg = request.form.get("ctg")
+        filteredclothes = []
+        for clothe in clothes:
+            if clothe.ctg == ctg:
+                filteredclothes.append(clothe)
+        if ctg == "all":
+            filteredclothes = clothes
+        return render_template("index.html", clothes=filteredclothes, ctgs=ctgs, bannerClothes=clothes)
+    return render_template('index.html', clothes=clothes, ctgs=ctgs, bannerClothes=clothes)
 
 
 @app.route("/login", methods=["POST", "GET"])

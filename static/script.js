@@ -16,15 +16,18 @@ nextItemBtn.addEventListener("click",(e)=>{
         onanimate=true
         let width = window.innerWidth
         let index = (banner.scrollLeft/width + 1)
-        let target = (index * width)-9
+        let target = (index * width)-1
+        
+        if(target > index && ( index<5)){
         console.log(index)
         e.preventDefault()
         console.log("next")
         const animate = setInterval(()=>{
             console.log("Animate ,", target," > ", banner.scrollLeft)
             console.log(banner.scrollLeft <= target)
-            banner.scrollLeft <= target? banner.scrollLeft +=10 : (onanimate=false,clearInterval(animate))
-        },1)
+            banner.scrollLeft <= target? banner.scrollLeft +=10 : (onanimate=false,banner.scrollLeft = target,clearInterval(animate))
+        },0.5)
+        }
     
     }
 })
@@ -33,15 +36,20 @@ prevItemBtn.addEventListener("click",(e)=>{
         onanimate = true
         let width = window.innerWidth
         let index = (banner.scrollLeft/width - 1)
-        let target = (index * width)+9
+        
+        let target = (index * width)+1
+        if (target > index){
         console.log(index)
         e.preventDefault()
         console.log("next")
         const animate = setInterval(()=>{
             console.log("Animate ,", target," > ", banner.scrollLeft)
             console.log(banner.scrollLeft <= target)
-            banner.scrollLeft >= target? banner.scrollLeft -=10 : (onanimate=false,clearInterval(animate))
-        },1)
+            banner.scrollLeft >= target? banner.scrollLeft -=10 : (onanimate=false,banner.scrollLeft = target,clearInterval(animate))
+        },0.5)
+        }else{
+            onanimate = false
+        }
     }
 
 })
