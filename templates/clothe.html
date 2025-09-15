@@ -1,30 +1,72 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<div class="spaceFromNav">
-<div class="wrapper">
-    <div class="clothe__card__big" >
-        <div class="big__card__img--space">
-            <img src="{{ clothe.imgurl }}" alt="">
-        </div>
-        <div class="big__card__right">
-            <div class="title" style="">
-                <h1>{{ clothe.name }}</h1>
+<main class="main-content">
+    <div class="wrapper">
+        <div class="clothe__card__big">
+            <div class="big__card__img--space">
+                <img src="{{ url_for('static', filename=clothe.imgurl) }}" alt="{{ clothe.name }}">
             </div>
-            <div class="info" style="">
-                <div class="price" style="color: green;text-align: center;">
-                    <p> R$ {{ clothe.price }}</p>
+            <div class="big__card__right">
+                <div class="product__title">
+                    <h1>
+                        {% if clothe.name == "Calça Jogger da Puma" %}
+                            Calça Jogger
+                        {% elif clothe.name == "Camisa do Corinthians" %}
+                            Camiseta Verde
+                        {% else %}
+                            {{ clothe.name }}
+                        {% endif %}
+                    </h1>
                 </div>
-                <div style="">
-                    <a href="/clothe/{{clothe.name}}">
-                    <button class="card__button defaultBtn" >Comprar</button>
+                <div class="product__info">
+                    <div class="price">
+                        <p>R$ {{ '%.2f'|format(clothe.price) }}</p>
+                    </div>
+                    <div class="product__details">
+                        <div class="product__description">
+                            <h2>Descrição</h2>
+                            <p>{{ clothe.description }}</p>
+                        </div>
+                        <div class="product__options">
+                            <div class="product__option-group">
+                                <label for="size">Tamanho:</label>
+                                <select id="size">
+                                    <option value="p">P</option>
+                                    <option value="m">M</option>
+                                    <option value="g">G</option>
+                                    <option value="gg">GG</option>
+                                </select>
+                            </div>
+                            <div class="product__option-group">
+                                <label for="quantity">Quantidade:</label>
+                                <input type="number" id="quantity" value="1" min="1">
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <button class="card__button defaultBtn">Comprar</button>
                     </a>
                 </div>
             </div>
-        </div>    
+        </div>
+        <div class="product__reviews">
+            <h2>Avaliações dos Clientes</h2>
+            {% for review in clothe.reviews %}
+            <div class="review__card">
+                <div class="review__header">
+                    <h4>{{ review.user }}</h4>
+                    <div class="review__rating">
+                        {% for i in range(review.rating) %}★{% endfor %}
+                        {% for i in range(5 - review.rating) %}☆{% endfor %}
+                    </div>
+                </div>
+                <div class="review__comment">
+                    <p>{{ review.comment }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
-</div>
-</div>
-
+</main>
 {% endblock %}

@@ -1,57 +1,60 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="home" style="height: 900px;justify-self: center; justify-content: center; padding-top: 40px;">
-    
-    <div class="banner relative" style="" >
-            <div class="prev bannerbtn bannerbtn--left" id="prev--item">
-                <p> < </p>
-            </div>
-            <div class="next bannerbtn bannerbtn--right" id="next--item">
-                <p> > </p>
-            </div>
-            <div class="banner-bg relative" id="banner">
+<main class="main-content">
+    <div class="hero-banner">
+        <div class="hero-banner__inner" id="banner-inner">
             {% for clothe in bannerClothes %}
             <div class="banner--item">
-                <img src="{{ clothe.imgurl }}" alt="">
+                <img src="{{ url_for('static', filename=clothe.imgurl) }}" alt="{{ clothe.name }}">
+                <div class="banner--text">
+                    <h1>{{ clothe.name }}</h1>
+                    <p>O melhor estilo para você.</p>
+                </div>
             </div>
             {% endfor %}
-            </div>
-
+        </div>
+        <button class="banner-nav__btn banner-nav__btn--left" id="prev-btn">&lt;</button>
+        <button class="banner-nav__btn banner-nav__btn--right" id="next-btn">&gt;</button>
     </div>
+    
     <div class="wrapper">
-        
-        <h1 class="clothes--title" style="color: antiquewhite;">Roupas</h1>
-        <form class="ctg_btns" method="post">
-
+        <h1 class="clothes--title">Roupas e Acessórios</h1>
+        <form class="ctg_btns" method="post" action="{{ url_for('home') }}">
             {% for ctg in ctgs %}
-            <button class="ctgBtn" name="ctg" value="{{ ctg }}">{{ ctg }}</button>
+            <button class="ctgBtn" name="ctg" value="{{ ctg }}">{{ ctg.upper() }}</button>
             {% endfor %}
         </form>
-        <div class="clothes__content" style="display: flex;justify-content: center; gap: 45px;padding-top: 50px;">
-        {% for clothe in clothes %}
-            <div class="clothe__card" >
+        <div class="clothes__content">
+            {% for clothe in clothes %}
+            <div class="clothe__card">
                 <div class="card--img--space">
-                    <img src="{{ clothe.imgurl }}" alt="">
+                    <img src="{{ url_for('static', filename=clothe.imgurl) }}" alt="{{ clothe.name }}">
                 </div>
                 <div class="card--content">
-                <div class="title" style="">
-                    <h1>{{ clothe.name }}</h1>
-                </div>
-                <div class="price" style="color: green;">
-                <p> R$ {{ clothe.price }}</p>
-                </div>
-                <div style="display: flex;justify-content: center;">
-                    <a href="ssr/clothe/{{clothe.id}}">
-                    <button class="card__button" >Comprar</button>
-                    </a>
-                </div>
+                    <div class="title">
+                        <h1>
+                            {% if clothe.name == "Calça Jogger da Puma" %}
+                                Calça Jogger
+                            {% elif clothe.name == "Camisa do Corinthians" %}
+                                Camiseta Verde
+                            {% else %}
+                                {{ clothe.name }}
+                            {% endif %}
+                        </h1>
+                    </div>
+                    <div class="price">
+                        <p>R$ {{ '%.2f'|format(clothe.price) }}</p>
+                    </div>
+                    <div>
+                        <a href="{{ url_for('info', id=clothe.id) }}">
+                            <button class="card__button">Comprar</button>
+                        </a>
+                    </div>
                 </div>    
             </div>
-        {% endfor %}
+            {% endfor %}
         </div>
     </div>
-</div>
-
-
+</main>
 {% endblock %}
